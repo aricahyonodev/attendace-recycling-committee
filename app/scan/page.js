@@ -129,29 +129,29 @@ const QRCodeScanner = () => {
   }, [isScanning]);
 
   return (
-    <div className=" h-screen pt-24 px-4 mb-28">
+    <div className=" h-screen pt-24 px-4 mb-40">
       {/* Navbar */}
       <NavbarTop />
 
-      <div className="bg-white rounded-md text-center pt-6 pb-8 shadow-sm">
+      <div className="bg-white rounded-md text-center pt-4 pb-6 shadow-sm text-sm">
         <div>
-          <p className="text-5xl">40</p>
+          <p className="text-4xl">40</p>
           <p className="">Total sudah mengumpulkan</p>
         </div>
         <div className="flex mt-4">
           <div className="flex-1">
-            <p className="text-3xl">40%</p>
+            <p className="text-2xl">40%</p>
             <p className="capitalize text-sm">terkumpul</p>
           </div>
           <div className="flex-1">
-            <p className="text-3xl">60%</p>
+            <p className="text-2xl">60%</p>
             <p className="capitalize text-sm">belum terkumpul</p>
           </div>
         </div>
       </div>
 
       <div className="">
-        <div className="flex justify-between mt-7 mb-2">
+        <div className="flex justify-between mt-5 mb-2">
           <p className="font-medium capitalize">Absensi terverifikasi</p>
           <p>Lihat Semua</p>
         </div>
