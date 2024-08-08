@@ -5,7 +5,6 @@ import Webcam from "react-webcam";
 import jsQR from "jsqr";
 
 const QRCodeScanner = ({getCodeScan}) => {
-  const [qrCode, setQrCode] = useState(null);
   const [isScanning, setIsScanning] = useState(true);
   const [videoHidden, setVideoHidden] = useState(false);
   const webcamRef = useRef(null);
@@ -53,7 +52,6 @@ const QRCodeScanner = ({getCodeScan}) => {
         );
 
         if (code) {
-          setQrCode(code.data);
           getCodeScan(code.data);
           setIsScanning(false);
           setVideoHidden(true);

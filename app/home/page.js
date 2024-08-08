@@ -1,32 +1,38 @@
 "use client";
-import { list } from "postcss";
+import axios from "axios";
 import QRCodeScanner from "../scan-computer/page";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MdQrCode2 } from "react-icons/md";
 
-const jemaat = [
-  {
-    id: 1,
-    nama: "ari cahyono",
-  },
-  {
-    id: 2,
-    nama: "endang ariantini",
-  },
-  {
-    id: 3,
-    nama: "yusuf sariyono",
-  },
-];
 export default function Home(params) {
   const [isActive, setIsActive] = useState(false);
   // const [code, setCode] = useState("JKFSSGM");
   const [code, setCode] = useState("");
   const [voter, setVoter] = useState([]);
+  const [listJemaat, setListJemaat] = useState([]);
+
+  useEffect(() => {
+    const isiData = async () => {
+      try {
+        const response = await axios.get("http://localhost:3000/googlesheet");
+        console.log("kamu jalan berapa kali");
+   setListJemaat(response.data);
+
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    isiData()
+    return () => {
+    }
+  }, [])
+  
 
   const buttonClik = () => {
     setIsActive(isActive ? false : true);
   };
+
 
   const getCodeScan = (code) => {
     setCode(code);
@@ -54,23 +60,31 @@ export default function Home(params) {
       </div>
     );
   };
-  const InputFormBySearch = ({ label, disabled = false }) => {
+
+  const InputFormBySearch =  ({ label}) => {
     const [value, setValue] = useState("");
     const [list, setList] = useState([]);
+    const [list2, setList2] = useState(listJemaat);
+    const [isDisable, setIsDisable] = useState(false)
 
     const onChange = (e) => {
       const value = e.target.value;
       setValue(value);
-      const listJemaat = jemaat.filter((dt) =>
-        dt.nama.toLowerCase().includes(value)
+      const listJemaat2 = list2.filter((dt) =>
+        dt.Nama.toLowerCase().includes(value)
       );
-      setList(listJemaat);
+      setList(listJemaat2);
+      console.log(listJemaat2);
+      
     };
 
-    const onClick = (data) => {
-      setValue(data.nama);
-      setVoter(data);
+    const onClick = async (data) => {
+       setValue(data.Nama);
+      console.log(data.Nama);
+      setIsDisable(!isDisable)
+      
       setList([]);
+      // setVoter(data);
     };
 
     return (
@@ -79,24 +93,23 @@ export default function Home(params) {
         <input
           type="text"
           value={value}
-          className={`border-2 p-2 rounded-md w-full capitalize ${
-            disabled && " cursor-not-allowed"
+          className={`border-b-2 p-2 rounded-md w-full capitalize ${isDisable && "cursor-not-allowed"}
           }`}
-          disabled={disabled}
           onChange={onChange}
+          disabled={isDisable}
         />
         <div className="absolute top-[70px] w-full right-0">
-          <ul>
             {list.map((ls) => (
-              <li
+              <div
                 onClick={() => onClick(ls)}
                 className="bg-white border-2 p-2 cursor-pointer hover:bg-green-200"
-                key={ls.nama}
+                key={ls.Nama}
               >
-                {ls.nama}
-              </li>
+                <div>
+                  <p>{ls.Nama}</p>
+                </div>
+              </div>
             ))}
-          </ul>
         </div>
       </div>
     );
@@ -110,11 +123,11 @@ export default function Home(params) {
           name="cars"
           id="cars"
           className="border-2 p-2 rounded-md w-full uppercase"
+          defaultValue={blokNumberActive}
         >
           {numberBlokList.map((number) => (
             <option
               value={number}
-              selected={blokNumberActive === number}
               key={`blok ${number}`}
               className="p-2"
             >
@@ -129,18 +142,13 @@ export default function Home(params) {
   const blok = hurufKeAngka(code && code[0]);
 
   return (
-    <div className="flex justify-center items-center text-center ">
+    <div className="flex justify-center text-center items-center">
       <div className="w-1/2">
         {!code && (
-          <div className="flex justify-center">
-            <button
-              onClick={buttonClik}
-              className="p-6 flex flex-col items-center bg-red-100 font-medium"
-            >
-              {!isActive && <MdQrCode2 size={"6em"} />}
-              {isActive ? "Matikan Camera" : "Scan Barcode"}
-            </button>
-          </div>
+          <button onClick={buttonClik} className="p-6 bg-red-300 text-center">
+            {!isActive && <MdQrCode2 size={"6em"} className="inline-block" />}
+            <p> {isActive ? "Matikan Camera" : "Scan Barcode"}</p>
+          </button>
         )}
         {isActive && <QRCodeScanner getCodeScan={getCodeScan} />}
 
