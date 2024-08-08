@@ -13,11 +13,11 @@ import { VscNotebook } from "react-icons/vsc";
 export function QrCode(second) {
     return (
       <div className="relative">
-        <div className="absolute -top-2 inset-0 flex flex-col items-center justify-center">
+        <div className="absolute -top-0 inset-0 flex flex-col items-center justify-center">
           <div className="relative flex items-center justify-center bg-[#FFFFFF] shadow-lg p-3 rounded-full">
             <AiOutlineQrcode size={"2em"} color="#118911" />
           </div>
-          <p className="text-[#939185] font-semibold text-sm my-1">QR Code</p>
+          {/* <p className="text-[#939185] font-semibold text-sm my-1">QR Code</p> */}
         </div>
       </div>
     );

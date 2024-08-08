@@ -13,7 +13,7 @@ export default function NavbarTop(second) {
           />
           <div>
             <p className="font-semibold">Wim Mostmans</p>
-            <p className="text-sm">God Bless You!</p>
+            <p className="text-sm">God to be Glory!</p>
           </div>
         </div>
 

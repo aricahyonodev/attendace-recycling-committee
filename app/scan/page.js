@@ -57,16 +57,16 @@ const QRCodeScanner = () => {
   useEffect(() => {
     const startVideo = async () => {
       try {
-        // const stream = await navigator.mediaDevices.getUserMedia({
-        //   video: {
-        //     facingMode: "environment", // Kamera belakang
-        //     width: { ideal: 1280 },
-        //     height: { ideal: 720 },
-        //   },
-        // });
+        const stream = await navigator.mediaDevices.getUserMedia({
+          video: {
+            facingMode: "environment", // Kamera belakang
+            width: { ideal: 1280 },
+            height: { ideal: 720 },
+          },
+        });
         if (videoRef.current) {
-          // videoRef.current.srcObject = stream;
-          // videoRef.current.play();
+          videoRef.current.srcObject = stream;
+          videoRef.current.play();
         }
       } catch (error) {
         console.error("Error accessing camera:", error);
@@ -115,15 +115,15 @@ const QRCodeScanner = () => {
     };
 
     if (isScanning) {
-      // scanQRCode();
+      scanQRCode();
     }
 
     // Cleanup function
     return () => {
       if (videoRef.current && videoRef.current.srcObject) {
-        // const stream = videoRef.current.srcObject;
-        // const tracks = stream.getTracks();
-        // tracks.forEach((track) => track.stop());
+        const stream = videoRef.current.srcObject;
+        const tracks = stream.getTracks();
+        tracks.forEach((track) => track.stop());
       }
     };
   }, [isScanning]);
@@ -131,7 +131,7 @@ const QRCodeScanner = () => {
   return (
     <div className=" h-screen pt-24 px-4 mb-40">
       {/* Navbar */}
-      <NavbarTop />
+      {/* <NavbarTop /> */}
 
       <div className="bg-white rounded-md text-center pt-4 pb-6 shadow-sm text-sm">
         <div>
@@ -156,16 +156,17 @@ const QRCodeScanner = () => {
           <p>Lihat Semua</p>
         </div>
 
-        <div className="">
+        {/* <div className="">
           {members.map((name, i) => (
             <MemberCard key={i} name={name} />
           ))}
-        </div>
+        </div> */}
       </div>
-      {/* <video
+      <video
         ref={videoRef}
+        id="myvideo"
         style={{
-          width: "100%",
+          width: "50%",
           height: "auto",
           border: "1px solid #ddd",
           display: videoHidden ? "none" : "block", // Sembunyikan video jika diperlukan
@@ -176,15 +177,15 @@ const QRCodeScanner = () => {
       <canvas
         ref={canvasRef}
         style={{ display: "none" }} // Canvas tidak perlu ditampilkan
-      ></canvas> */}
-      {/* {qrCode && (
+      ></canvas>
+      {qrCode && (
         <div style={{ marginTop: "20px" }}>
           <h3>QR Code Detected:</h3>
           <p>{qrCode}</p>
         </div>
-      )} */}
+      )}
 
-      <MobileFooter></MobileFooter>
+      {/* <MobileFooter></MobileFooter> */}
     </div>
   );
 };
