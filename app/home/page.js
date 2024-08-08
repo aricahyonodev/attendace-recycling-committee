@@ -10,29 +10,27 @@ export default function Home(params) {
   const [code, setCode] = useState("");
   const [voter, setVoter] = useState([]);
   const [listJemaat, setListJemaat] = useState([]);
+       console.log(process.env.GOOGLE_BASE);
 
   useEffect(() => {
     const isiData = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/googlesheet");
+        const response = await axios.get(`/googlesheet`);
+       
         console.log("kamu jalan berapa kali");
-   setListJemaat(response.data);
-
+        setListJemaat(response.data);
       } catch (error) {
         console.error(error);
       }
     };
 
-    isiData()
-    return () => {
-    }
-  }, [])
-  
+    isiData();
+    return () => {};
+  }, []);
 
   const buttonClik = () => {
     setIsActive(isActive ? false : true);
   };
-
 
   const getCodeScan = (code) => {
     setCode(code);
@@ -61,11 +59,11 @@ export default function Home(params) {
     );
   };
 
-  const InputFormBySearch =  ({ label}) => {
+  const InputFormBySearch = ({ label }) => {
     const [value, setValue] = useState("");
     const [list, setList] = useState([]);
     const [list2, setList2] = useState(listJemaat);
-    const [isDisable, setIsDisable] = useState(false)
+    const [isDisable, setIsDisable] = useState(false);
 
     const onChange = (e) => {
       const value = e.target.value;
@@ -75,14 +73,13 @@ export default function Home(params) {
       );
       setList(listJemaat2);
       console.log(listJemaat2);
-      
     };
 
     const onClick = async (data) => {
-       setValue(data.Nama);
+      setValue(data.Nama);
       console.log(data.Nama);
-      setIsDisable(!isDisable)
-      
+      setIsDisable(!isDisable);
+
       setList([]);
       // setVoter(data);
     };
@@ -93,23 +90,25 @@ export default function Home(params) {
         <input
           type="text"
           value={value}
-          className={`border-b-2 p-2 rounded-md w-full capitalize ${isDisable && "cursor-not-allowed"}
+          className={`border-b-2 p-2 rounded-md w-full capitalize ${
+            isDisable && "cursor-not-allowed"
+          }
           }`}
           onChange={onChange}
           disabled={isDisable}
         />
         <div className="absolute top-[70px] w-full right-0">
-            {list.map((ls) => (
-              <div
-                onClick={() => onClick(ls)}
-                className="bg-white border-2 p-2 cursor-pointer hover:bg-green-200"
-                key={ls.Nama}
-              >
-                <div>
-                  <p>{ls.Nama}</p>
-                </div>
+          {list.map((ls) => (
+            <div
+              onClick={() => onClick(ls)}
+              className="bg-white border-2 p-2 cursor-pointer hover:bg-green-200"
+              key={ls.Nama}
+            >
+              <div>
+                <p>{ls.Nama}</p>
               </div>
-            ))}
+            </div>
+          ))}
         </div>
       </div>
     );
@@ -126,11 +125,7 @@ export default function Home(params) {
           defaultValue={blokNumberActive}
         >
           {numberBlokList.map((number) => (
-            <option
-              value={number}
-              key={`blok ${number}`}
-              className="p-2"
-            >
+            <option value={number} key={`blok ${number}`} className="p-2">
               blok {number}
             </option>
           ))}
