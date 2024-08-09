@@ -19,7 +19,7 @@ function InputFormBySearch({ data, label, blokNumber, qrCode }) {
 
   const HandleClickSubmit = async () => {
     // Fungsi untuk melakukan POST request
-    const response = await fetch("http://localhost:3000/googlesheet", {
+    const response = await fetch("/googlesheet", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(pemilih),
