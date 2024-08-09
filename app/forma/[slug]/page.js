@@ -42,7 +42,7 @@ export default async function FormA({ params }) {
 
   return (
     <div className="flex justify-center">
-      <div className="bg-white border-2 w-5/6 shadow-md rounded-md pt-14 text-start px-6 ">
+      <div className="bg-white border-2 lg:w-1/4 shadow-md rounded-md pt-14 text-start px-6 ">
         <h1 className="uppercase text-2xl font-semibold text-center mb-7">
           form a
         </h1>

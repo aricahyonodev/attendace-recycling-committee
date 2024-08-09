@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { MdQrCode2 } from "react-icons/md";
 import useSWR from "swr";
 import { useRouter } from "next/navigation";
+import MobileFooter from "../scan/mobileFooter";
 
 export default function Home() {
   const [isActive, setIsActive] = useState(false);
@@ -34,6 +35,7 @@ export default function Home() {
           </button>
         )}
         {isActive && <QRCodeScanner getCodeScan={getCodeScan} />}
+        <MobileFooter/>
       </div>
     </div>
   );
