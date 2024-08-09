@@ -120,8 +120,9 @@ const QRCodeScanner = () => {
 
     // Cleanup function
     return () => {
-      if (videoRef.current && videoRef.current.srcObject) {
-        const stream = videoRef.current.srcObject;
+      const refVideo = videoRef
+      if (refVideo.current && refVideo.current.srcObject) {
+        const stream = refVideo.current.srcObject;
         const tracks = stream.getTracks();
         tracks.forEach((track) => track.stop());
       }
