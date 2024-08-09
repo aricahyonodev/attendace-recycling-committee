@@ -11,14 +11,13 @@ const QRCodeScanner = ({ getCodeScan }) => {
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
 
-    const isDesktopOrLaptop = useMediaQuery({
-      query: "(min-width: 1224px)",
-    });
-    const isBigScreen = useMediaQuery({ query: "(min-width: 1824px)" });
-    const isTabletOrMobile = useMediaQuery({ query: "(max-width: 1000px)" });
-    const isPortrait = useMediaQuery({ query: "(orientation: portrait)" });
-    const isRetina = useMediaQuery({ query: "(min-resolution: 2dppx)" });
-
+  const isDesktopOrLaptop = useMediaQuery({
+    query: "(min-width: 1224px)",
+  });
+  const isBigScreen = useMediaQuery({ query: "(min-width: 1824px)" });
+  const isTabletOrMobile = useMediaQuery({ query: "(max-width: 1000px)" });
+  const isPortrait = useMediaQuery({ query: "(orientation: portrait)" });
+  const isRetina = useMediaQuery({ query: "(min-resolution: 2dppx)" });
 
   // Fungsi untuk menghentikan video
   const stopStream = () => {
@@ -93,6 +92,9 @@ const QRCodeScanner = ({ getCodeScan }) => {
           <Webcam
             audio={false}
             ref={webcamRef}
+            videoConstraints={{
+              facingMode: "user",
+            }}
             screenshotFormat="image/jpeg"
             style={{ width: "100%", height: "100%", objectFit: "cover" }}
             className={`webcamp   ${videoHidden ? "none" : "block"}`}
