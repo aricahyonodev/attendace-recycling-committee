@@ -59,7 +59,7 @@ const QRCodeScanner = () => {
       try {
         const stream = await navigator.mediaDevices.getUserMedia({
           video: {
-            facingMode: "environment", // Kamera belakang
+            facingMode: isTabletOrMobile ? "user" :  "environment" , // Kamera belakang
             width: { ideal: 1280 },
             height: { ideal: 720 },
           },
