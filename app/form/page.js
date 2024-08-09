@@ -1,22 +1,22 @@
-import SearchComponent from "./searchComponent";
+// import SearchComponent from "./searchComponent";
 
-async function allData(params) {
+// async function allData(params) {
    
-}
+// }
 
-export default async function Form(second) {
+// export default async function Form(second) {
 
-  let data;
+//   let data;
 
-   try {
-    const revalidatedData = await fetch(`/googlesheet`, {
-    });
-    data =  await revalidatedData.json();
-  } catch (error) {
-    console.log(error);
-  }
+//    try {
+//     const revalidatedData = await fetch(`/googlesheet`, {
+//     });
+//     data =  await revalidatedData.json();
+//   } catch (error) {
+//     console.log(error);
+//   }
 
-  return (
-    <SearchComponent data={data} />
-  );
-}
+//   return (
+//     <SearchComponent data={data} />
+//   );
+// }
