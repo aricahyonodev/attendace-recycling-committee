@@ -1,4 +1,5 @@
 "use client";
+import testClient from "@/app/actions/sheet/test";
 import { useState } from "react";
 
 function InputFormBySearch({ data, label, blokNumber, qrCode }) {
@@ -54,12 +55,44 @@ function InputFormBySearch({ data, label, blokNumber, qrCode }) {
         </div>
       </div>
       <div className="flex-col justify-center mt-8 mb-10">
-        <button
-          onClick={HandleClickSubmit}
+        {pemilih && (
+          <form action={testClient}>
+            <input
+              value={qrCode}
+              name="qrcode"
+              hidden
+              type="text"
+              readOnly
+            />
+            <input
+              value={pemilih?.No}
+              name="no_pemilih"
+              hidden
+              type="text"
+              readOnly
+            />
+            <input
+              value={blokNumber}
+              name="blok_number"
+              hidden
+              type="text"
+              readOnly
+            />
+            <button
+              type="submit"
+              // onClick={HandleClickSubmit}
+              className="bg-green-500 font-medium p-2 w-full rounded-md"
+            >
+              Submit
+            </button>
+          </form>
+        )}
+        {/* <button
+          // onClick={HandleClickSubmit}
           className="bg-green-500 font-medium p-2 w-full rounded-md"
         >
           Submit
-        </button>
+        </button> */}
       </div>
     </>
   );

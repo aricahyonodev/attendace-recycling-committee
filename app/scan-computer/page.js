@@ -3,12 +3,22 @@
 import React, { useEffect, useRef, useState } from "react";
 import Webcam from "react-webcam";
 import jsQR from "jsqr";
+import { useMediaQuery } from "react-responsive";
 
-const QRCodeScanner = ({getCodeScan}) => {
+const QRCodeScanner = ({ getCodeScan }) => {
   const [isScanning, setIsScanning] = useState(true);
   const [videoHidden, setVideoHidden] = useState(false);
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
+
+    const isDesktopOrLaptop = useMediaQuery({
+      query: "(min-width: 1224px)",
+    });
+    const isBigScreen = useMediaQuery({ query: "(min-width: 1824px)" });
+    const isTabletOrMobile = useMediaQuery({ query: "(max-width: 1000px)" });
+    const isPortrait = useMediaQuery({ query: "(orientation: portrait)" });
+    const isRetina = useMediaQuery({ query: "(min-resolution: 2dppx)" });
+
 
   // Fungsi untuk menghentikan video
   const stopStream = () => {
@@ -77,23 +87,21 @@ const QRCodeScanner = ({getCodeScan}) => {
   }, [isScanning]);
 
   return (
-    <div className="pt-24 px-4 ">
-      <div className="flex flex-col items-center relative">
-        <div className="w-full">
+    <div className="pt-24 ">
+      <div className="flex flex-col justify-center items-center relative">
+        <div style={{ height: "100vh", width: "100%" }}>
           <Webcam
             audio={false}
             ref={webcamRef}
             screenshotFormat="image/jpeg"
-            videoConstraints={{ facingMode: "environment" }}
-            className="w-full"
-            style={{
-              height: "auto",
-              border: "1px solid #ddd",
-              background: "rgba(0, 0, 0, 0.3)",
-              display: videoHidden ? "none" : "block",
-            }}
+            style={{ width: "100%", height: "100%", objectFit: "cover" }}
+            className={`webcamp   ${videoHidden ? "none" : "block"}`}
           />
-          <canvas ref={canvasRef} style={{ display: "none" }}></canvas>
+          <canvas
+            ref={canvasRef}
+            className="w-screen"
+            style={{ display: "none" }}
+          ></canvas>
           {!videoHidden && (
             <div
               style={{
@@ -123,7 +131,6 @@ const QRCodeScanner = ({getCodeScan}) => {
             </div>
           )}
         </div>
-   
       </div>
     </div>
   );

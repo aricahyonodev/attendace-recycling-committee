@@ -31,7 +31,7 @@ export default async function FormA({ params }) {
   let data;
   const blokNumber = hurufKeAngka(qrCode[0])
 
-  try {
+  try { 
     const revalidatedData = await fetch(
       `http://localhost:3000/googlesheet/${blokNumber}`
     );
@@ -42,13 +42,14 @@ export default async function FormA({ params }) {
 
   return (
     <div className="flex justify-center">
-      <div className="bg-white border-2 w-1/4 shadow-md rounded-md pt-14 text-start px-6 ">
+      <div className="bg-white border-2 w-5/6 shadow-md rounded-md pt-14 text-start px-6 ">
         <h1 className="uppercase text-2xl font-semibold text-center mb-7">
           form a
         </h1>
 
         <InputForm label={"Code"} inpuValue={qrCode} disabled={true} />
         <SelectForm blokNumber={blokNumber} />
+        <InputFormBySearch label={"nama pemilih"} qrCode={qrCode} data={data} blokNumber={blokNumber} />
       </div>
     </div>
   );

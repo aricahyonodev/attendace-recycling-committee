@@ -1,5 +1,7 @@
-import { InputFormBySearch } from "./inputFormBySearch";
-import {  SelectForm } from "./selectForm";
+'use client'
+
+import { useState } from "react";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 
 const InputForm = ({ label, inpuValue, disabled = false }) => {
   return (
@@ -11,7 +13,7 @@ const InputForm = ({ label, inpuValue, disabled = false }) => {
         className={`border-2 p-2 rounded-md w-full ${
           disabled && " cursor-not-allowed"
         }`}
-        // readOnly
+        readOnly
         disabled={disabled}
       />
     </div>
@@ -26,30 +28,40 @@ function hurufKeAngka(huruf) {
 }
 
 
-export default async function FormA({ params }) {
+export default function FormA({ params }) {
   const qrCode = params.slug;
-  let data;
+
   const blokNumber = hurufKeAngka(qrCode[0])
 
-  try {
-    const revalidatedData = await fetch(
-      `http://localhost:3000/googlesheet/${blokNumber}`
-    );
-    data = await revalidatedData.json();
-  } catch (error) {
-    console.log(error);
-  }
+  const [state, setState] = useState({
+    value: qrCode,
+    copied: false,
+  }); 
+
 
   return (
     <div className="flex justify-center">
-      <div className="bg-white border-2 w-1/4 shadow-md rounded-md pt-14 text-start px-6 ">
+      <div className="bg-white border-2 sm:w-screen lg:w-1/4 shadow-md rounded-md pt-14 text-start px-6 ">
         <h1 className="uppercase text-2xl font-semibold text-center mb-7">
           form a
         </h1>
 
+        <InputForm label={"Blok"} inpuValue={blokNumber} disabled={true} />
         <InputForm label={"Code"} inpuValue={qrCode} disabled={true} />
-        <SelectForm blokNumber={blokNumber} />
-        <InputFormBySearch label={"nama pemilih"} qrCode={qrCode} data={data} blokNumber={blokNumber} />
+        <CopyToClipboard
+          text={state.value}
+          onCopy={() => setState({ ...state, copied: true })}
+        >
+          <button
+            className={`p-2 bg-green-400 w-full mt-8 text-white rounded-md ${
+              state.copied ? "bg-slate-600 " : "bg-green-600"
+            }`}
+          >
+            Copy QRCODE
+          </button>
+        </CopyToClipboard>
+
+        <div className="pb-12" />
       </div>
     </div>
   );
