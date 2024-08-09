@@ -59,7 +59,7 @@ const QRCodeScanner = () => {
       try {
         const stream = await navigator.mediaDevices.getUserMedia({
           video: {
-            facingMode: isTabletOrMobile ? { exact: "environment" } : "user",
+            facingMode: "user",
             width: { ideal: 1280 },
             height: { ideal: 720 },
           },
@@ -72,7 +72,6 @@ const QRCodeScanner = () => {
         console.error("Error accessing camera:", error);
       }
     };
-     const isTabletOrMobile = useMediaQuery({ query: "(max-width: 1000px)" });
 
     startVideo();
 
