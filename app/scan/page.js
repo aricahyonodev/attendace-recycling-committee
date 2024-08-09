@@ -4,6 +4,7 @@ import jsQR from "jsqr";
 import MobileFooter from "./mobileFooter";
 import NavbarTop from "./navbarTop";
 import Avatar from "react-avatar";
+import { useMediaQuery } from "react-responsive";
 
 const members = [
   "yan edi",
@@ -19,10 +20,9 @@ const getRandomColor = (colors) => {
   return colors[randomIndex];
 };
 
-export const MemberCard = ({name}) => {
-
-   const colors = ["#557C55", "#6482AD", "#213363"]; // Contoh warna hex
-   const randomColor = getRandomColor(colors);
+export const MemberCard = ({ name }) => {
+  const colors = ["#557C55", "#6482AD", "#213363"]; // Contoh warna hex
+  const randomColor = getRandomColor(colors);
 
   return (
     <div className="px-2 py-3 flex bg-white my-1 shadow-sm rounded-md">
@@ -45,7 +45,7 @@ export const MemberCard = ({name}) => {
       </div>
     </div>
   );
-}
+};
 
 const QRCodeScanner = () => {
   const videoRef = useRef(null);
@@ -59,7 +59,7 @@ const QRCodeScanner = () => {
       try {
         const stream = await navigator.mediaDevices.getUserMedia({
           video: {
-            facingMode: "environment", // Kamera belakang
+            facingMode: isTabletOrMobile ? { exact: "environment" } : "user",
             width: { ideal: 1280 },
             height: { ideal: 720 },
           },
@@ -72,6 +72,7 @@ const QRCodeScanner = () => {
         console.error("Error accessing camera:", error);
       }
     };
+     const isTabletOrMobile = useMediaQuery({ query: "(max-width: 1000px)" });
 
     startVideo();
 
@@ -120,7 +121,7 @@ const QRCodeScanner = () => {
 
     // Cleanup function
     return () => {
-      const refVideo = videoRef
+      const refVideo = videoRef;
       if (refVideo.current && refVideo.current.srcObject) {
         const stream = refVideo.current.srcObject;
         const tracks = stream.getTracks();

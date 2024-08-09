@@ -93,7 +93,7 @@ const QRCodeScanner = ({ getCodeScan }) => {
             audio={false}
             ref={webcamRef}
             videoConstraints={{
-              facingMode:  { exact: "environment"  },
+              facingMode: isTabletOrMobile ? { exact: "environment" } : "user",
             }}
             screenshotFormat="image/jpeg"
             style={{ width: "100%", height: "100%", objectFit: "cover" }}
