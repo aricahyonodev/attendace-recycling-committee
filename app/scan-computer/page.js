@@ -8,6 +8,7 @@ import { useMediaQuery } from "react-responsive";
 const QRCodeScanner = ({ getCodeScan }) => {
   const [isScanning, setIsScanning] = useState(true);
   const [videoHidden, setVideoHidden] = useState(false);
+  const [changeCamera, setChangeCamera] = useState(false);
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
 
@@ -86,14 +87,20 @@ const QRCodeScanner = ({ getCodeScan }) => {
   }, [isScanning]);
 
   return (
-    <div className="pt-24 ">
+    <div>
       <div className="flex flex-col justify-center items-center relative">
+        <button
+          className="absolute top-0 mt-1 rounded-md px-4 py-2 bg-green-500 text-white font-medium lg:hidden"
+          onClick={() => setChangeCamera(!changeCamera)}
+        >
+          {changeCamera ? "Kamera Belakang" : "Kamera Depan"}
+        </button>
         <div style={{ height: "100vh", width: "100%" }}>
           <Webcam
             audio={false}
             ref={webcamRef}
             videoConstraints={{
-              facingMode: isTabletOrMobile ? { exact: "environment" } : "user",
+              facingMode: changeCamera ? { exact: "environment" } : "user",
             }}
             screenshotFormat="image/jpeg"
             style={{ width: "100%", height: "100%", objectFit: "cover" }}

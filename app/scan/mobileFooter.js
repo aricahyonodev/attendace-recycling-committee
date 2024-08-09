@@ -10,25 +10,28 @@ import { MdOutlineDoorBack } from "react-icons/md";
 import { TbDoorExit } from "react-icons/tb";
 import { VscNotebook } from "react-icons/vsc";
 // FaBookmark;
-export function QrCode(second) {
-    return (
-      <div className="relative">
-        <div className="absolute -top-0 inset-0 flex flex-col items-center justify-center">
-          <div className="relative flex items-center justify-center bg-[#FFFFFF] shadow-lg p-3 rounded-full">
-            <AiOutlineQrcode size={"2em"} color="#118911" />
-          </div>
-          {/* <p className="text-[#939185] font-semibold text-sm my-1">QR Code</p> */}
+export function QrCode({ buttonScan }) {
+  return (
+    <div className="relative">
+      <div className="absolute -top-10 inset-0 flex flex-col items-center justify-center">
+        <div
+          onClick={buttonScan}
+          className="relative flex items-center justify-center bg-[#FFFFFF] shadow-md p-3 rounded-full"
+        >
+          <AiOutlineQrcode size={"2em"} color="#118911" />
         </div>
+        {/* <p className="text-[#939185] font-semibold text-sm my-1">QR Code</p> */}
       </div>
-    );
+    </div>
+  );
 }
 
-export default function MobileFooter(params) {
+export default function MobileFooter({ buttonScan  }) {
   return (
-    <div className="shadow-md fixed bottom-0 right-0 w-full py-2 px-5 bg-[#FFFFFF] ">
-      <QrCode />
+    <div className="lg:hidden shadow-md fixed bottom-0 right-0 w-full py-2 px-5 bg-[#FFFFFF] ">
+      <QrCode buttonScan={buttonScan} />
       <div className="flex ">
-        <div className="flex-1 flex justify-start space-x-6 text-sm">
+        <div className="flex-1 flex justify-between space-x-6 text-sm">
           <div className="flex-row text-center text-[#118911]">
             <GoHomeFill size={"1.6em"} className="inline-block" />
             <p>Home</p>
@@ -41,8 +44,6 @@ export default function MobileFooter(params) {
           {/* <IoIosListBox size={"2em"} className="text-white" /> */}
           {/* <FaRegRectangleList size={"2em"} className="text-white" /> */}
           {/* <RiFileList3Line size={"2em"} className="text-white" /> */}
-        </div>
-        <div className="flex-1 flex justify-end space-x-6 text-sm">
           <div className="flex-row text-center text-[#939185]">
             <VscNotebook size={"1.6em"} className="inline-block" />
             <p>Note</p>

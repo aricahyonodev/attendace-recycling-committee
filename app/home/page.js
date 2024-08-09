@@ -27,15 +27,15 @@ export default function Home() {
 
   return (
     <div className="flex justify-center text-center items-center">
-      <div className="w-1/2">
+      <div className="lg:w-1/2">
         {!code && (
-          <button onClick={buttonClik} className="p-6 bg-red-300 text-center">
+          <button onClick={buttonClik} className="hidden lg:block  p-6 bg-red-300 text-center">
             {!isActive && <MdQrCode2 size={"6em"} className="inline-block" />}
             <p> {isActive ? "Matikan Camera" : "Scan Barcode"}</p>
           </button>
         )}
         {isActive && <QRCodeScanner getCodeScan={getCodeScan} />}
-        <MobileFooter/>
+        <MobileFooter buttonScan={buttonClik} />
       </div>
     </div>
   );
