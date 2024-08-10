@@ -12,7 +12,7 @@ export default function FormAError(second) {
           <p className="text-start text-neutral-600">
             Segera hubungi admin.
           </p>
-          <Link href={"/home"}>
+          <Link href={"/dashboard"}>
             <button className="capitalize w-full mt-8 p-3 text-white bg-red-500 rounded-md font-medium cursor-pointer">
               Kembali ke Home
             </button>

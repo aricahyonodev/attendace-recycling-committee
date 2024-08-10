@@ -10,7 +10,7 @@ export default function GlobalError() {
           <p className="font-extrabold text-lg lg:text-2xl mt-1">Maafff!</p>
           <p className="font-semibold mb-2">Sistem Sedang Bermasalah</p>
           <p className="text-start text-neutral-600">Segera hubungi admin.</p>
-          <Link href={"/home"}>
+          <Link href={"/dashboard"}>
             <button className="capitalize w-full mt-8 p-3 text-white bg-red-500 rounded-md font-medium cursor-pointer">
               Kembali ke Home
             </button>
