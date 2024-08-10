@@ -1,5 +1,5 @@
 import { InputFormBySearch } from "./inputFormBySearch";
-import {  SelectForm } from "./selectForm";
+import { SelectForm } from "./selectForm";
 
 const InputForm = ({ label, inpuValue, disabled = false }) => {
   return (
@@ -18,22 +18,21 @@ const InputForm = ({ label, inpuValue, disabled = false }) => {
   );
 };
 
-
 function hurufKeAngka(huruf) {
   huruf = huruf.toUpperCase(); // Mengubah huruf menjadi huruf besar
 
   return huruf.charCodeAt(0) - "A".charCodeAt(0);
 }
 
-
 export default async function FormA({ params }) {
   const qrCode = params.slug;
   let data;
-  const blokNumber = hurufKeAngka(qrCode[0])
+  const blokNumber = hurufKeAngka(qrCode[0]);
 
-  try { 
+  try {
     const revalidatedData = await fetch(
-      `https://attendace-recycling-committee.vercel.app/googlesheet/${blokNumber}`
+      `https://attendace-recdycling-committee.vercel.app/googlesheet/${blokNumber}`,
+      { cache: "no-store" }
     );
     data = await revalidatedData.json();
   } catch (error) {
@@ -43,7 +42,7 @@ export default async function FormA({ params }) {
   return (
     <div className="flex justify-center h-screen items-center">
       <div className="bg-white border-2 lg:w-1/4 shadow-md rounded-md pt-14 text-start px-6 ">
-        <h1 className="uppercase text-2xl font-semibold text-center mb-7">
+        <h1 className="uppercase text-xl lg:text-2xl font-semibold text-center mb-7">
           pendataan Absensi
           <br />
           <span>form a</span>

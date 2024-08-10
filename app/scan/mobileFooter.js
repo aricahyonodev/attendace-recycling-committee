@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { AiOutlineQrcode } from "react-icons/ai";
 import { GoHome, GoHomeFill } from "react-icons/go";
@@ -12,7 +12,7 @@ import { MdOutlineDoorBack } from "react-icons/md";
 import { TbDoorExit } from "react-icons/tb";
 import { VscNotebook } from "react-icons/vsc";
 import QRCodeScanner from "../scan-computer/page";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 // FaBookmark;
 export function QrCode({ buttonScan }) {
@@ -32,24 +32,33 @@ export function QrCode({ buttonScan }) {
 }
 
 export default function MobileFooter({ hideContent }) {
+  const [isActive, setIsActive] = useState(false);
+  // const [code, setCode] = useState("JKFSSGM");
+  const [code, setCode] = useState("");
+  const router = useRouter();
+  const pathname = usePathname();
 
-    const [isActive, setIsActive] = useState(false);
-    // const [code, setCode] = useState("JKFSSGM");
-    const [code, setCode] = useState("");
-    const router = useRouter();
+  // const fetcher = (url) => fetch(url).then((r) => r.json());
+  // const { data, error, isLoading } = useSWR("/googlesheet", fetcher);
 
-    // const fetcher = (url) => fetch(url).then((r) => r.json());
-    // const { data, error, isLoading } = useSWR("/googlesheet", fetcher);
+  const buttonClik = () => {
+    setIsActive(!isActive);
 
-    const buttonClik = () => {
-      setIsActive(isActive ? false : true);
+    hideContent();
+  };
+
+  const getCodeScan = (code) => {
+    setCode(code);
+
+    // Ambil bagian URL yang diinginkan
+    const basePath = "/dashboard/forma/";
+    if (pathname.startsWith(basePath)) {
+      setIsActive(!isActive);
       hideContent();
-    };
+    }
 
-    const getCodeScan = (code) => {
-      setCode(code);
-      router.push(`/forma/${code}`);
-    };
+    router.push(`/dashboard/forma/${code}`);
+  };
 
   return (
     <>

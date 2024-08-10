@@ -23,7 +23,6 @@ const getRandomColor = (colors) => {
   return colors[randomIndex];
 };
 
-
 export const MemberCard = ({ name }) => {
   const colors = ["#1A5319", "#D6EFD8", "#9CDBA6"]; // Contoh warna hex
   const randomColor = getRandomColor(colors);
@@ -53,16 +52,11 @@ export const MemberCard = ({ name }) => {
   );
 };
 
-
 export default function Home() {
   const [isActive, setIsActive] = useState(false);
-  // const [code, setCode] = useState("JKFSSGM");
   const [code, setCode] = useState("");
   const [contentHide, setContentHide] = useState(false);
   const router = useRouter();
-
-  // const fetcher = (url) => fetch(url).then((r) => r.json());
-  // const { data, error, isLoading } = useSWR("/googlesheet", fetcher);
 
   const buttonClik = () => {
     setIsActive(isActive ? false : true);
@@ -74,43 +68,40 @@ export default function Home() {
   };
 
   return (
-    <>
-      <MobileFooter hideContent={() => setContentHide(!contentHide)} />
       <div className="px-4">
-        {
-          !contentHide && <div>
-            <NavbarTop />
-        <div className="mt-24 bg-white rounded-md text-center pt-4 pb-6 shadow-sm text-sm">
+        {!isActive && (
           <div>
-            <p className="text-4xl">40</p>
-            <p className="">Total sudah mengumpulkan</p>
-          </div>
-          <div className="flex mt-4">
-            <div className="flex-1">
-              <p className="text-2xl">40%</p>
-              <p className="capitalize text-sm">terkumpul</p>
+            <div className="mt-24 bg-white rounded-md text-center pt-4 pb-6 shadow-sm text-sm">
+              <div>
+                <p className="text-4xl">40</p>
+                <p className="">Total sudah mengumpulkan</p>
+              </div>
+              <div className="flex mt-4">
+                <div className="flex-1">
+                  <p className="text-2xl">40%</p>
+                  <p className="capitalize text-sm">terkumpul</p>
+                </div>
+                <div className="flex-1">
+                  <p className="text-2xl">60%</p>
+                  <p className="capitalize text-sm">belum terkumpul</p>
+                </div>
+              </div>
             </div>
-            <div className="flex-1">
-              <p className="text-2xl">60%</p>
-              <p className="capitalize text-sm">belum terkumpul</p>
+
+            <div className="text-sm">
+              <div className="flex justify-between mt-5 mb-2">
+                <p className="font-medium capitalize">Absensi terverifikasi</p>
+                <p>Lihat Semua</p>
+              </div>
+
+              <div className="mb-32">
+                {members.map((name, i) => (
+                  <MemberCard key={i} name={name} />
+                ))}
+              </div>
             </div>
           </div>
-        </div>
-
-        <div className="text-sm">
-          <div className="flex justify-between mt-5 mb-2">
-            <p className="font-medium capitalize">Absensi terverifikasi</p>
-            <p>Lihat Semua</p>
-          </div>
-
-          <div className="mb-32">
-            {members.map((name, i) => (
-              <MemberCard key={i} name={name} />
-            ))}
-          </div>
-        </div>
-          </div>
-        }
+        )}
         <div className="flex justify-center text-center items-center">
           <div className="lg:w-1/2 ">
             {!code && (
@@ -130,6 +121,5 @@ export default function Home() {
           </div>
         </div>
       </div>
-    </>
   );
 }
