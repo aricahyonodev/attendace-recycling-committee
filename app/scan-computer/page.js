@@ -89,7 +89,7 @@ const QRCodeScanner = ({ getCodeScan }) => {
 
   return (
     <div>
-      <div className="flex flex-col justify-center items-center relative">
+      <div className="flex flex-col justify-center items-center relative ">
         {isTabletOrMobile && (
           <button
             className="absolute z-10 top-0 mt-1 rounded-md px-4 py-2 bg-green-500 text-white font-medium lg:hidden"
@@ -111,7 +111,7 @@ const QRCodeScanner = ({ getCodeScan }) => {
                   : "user",
             }}
             screenshotFormat="image/jpeg"
-            style={{ width: "100%", height: "100%", objectFit: "cover" }}
+            style={{ width: "100%", height: "100%", objectFit: "cover", }}
             className={`webcamp   ${videoHidden ? "none" : "block"}`}
           />
           <canvas

@@ -31,7 +31,7 @@ export function QrCode({ buttonScan }) {
   );
 }
 
-export default function MobileFooter() {
+export default function MobileFooter({ hideContent }) {
 
     const [isActive, setIsActive] = useState(false);
     // const [code, setCode] = useState("JKFSSGM");
@@ -43,6 +43,8 @@ export default function MobileFooter() {
 
     const buttonClik = () => {
       setIsActive(isActive ? false : true);
+      hideContent();
+      
     };
 
     const getCodeScan = (code) => {
