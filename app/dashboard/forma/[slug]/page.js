@@ -31,7 +31,7 @@ export default async function FormA({ params }) {
 
   try {
     const revalidatedData = await fetch(
-      `http://localhost:3000/googlesheet/${blokNumber}`,
+      `/googlesheet/${blokNumber}`,
       { cache: "no-store" }
     );
     data = await revalidatedData.json();
