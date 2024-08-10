@@ -1,6 +1,6 @@
 "use server";
 
-import { googleSheet } from "@/app/helpers/googleSheet";
+import { googleSheet } from "@/helpers/googleSheet";
 
  async function getData() {
   const doc = await googleSheet(); // loads document properties and worksheets

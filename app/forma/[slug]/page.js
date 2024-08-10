@@ -8,7 +8,7 @@ const InputForm = ({ label, inpuValue, disabled = false }) => {
       <input
         type="text"
         value={inpuValue}
-        className={`border-2 p-2 rounded-md w-full ${
+        className={`border-b-2 p-2   w-full ${
           disabled && " cursor-not-allowed"
         }`}
         // readOnly
@@ -41,15 +41,22 @@ export default async function FormA({ params }) {
   }
 
   return (
-    <div className="flex justify-center">
+    <div className="flex justify-center h-screen items-center">
       <div className="bg-white border-2 lg:w-1/4 shadow-md rounded-md pt-14 text-start px-6 ">
         <h1 className="uppercase text-2xl font-semibold text-center mb-7">
-          form a
+          pendataan Absensi
+          <br />
+          <span>form a</span>
         </h1>
 
         <InputForm label={"Code"} inpuValue={qrCode} disabled={true} />
         <SelectForm blokNumber={blokNumber} />
-        <InputFormBySearch label={"nama pemilih"} qrCode={qrCode} data={data} blokNumber={blokNumber} />
+        <InputFormBySearch
+          label={"nama pemilih"}
+          qrCode={qrCode}
+          data={data}
+          blokNumber={blokNumber}
+        />
       </div>
     </div>
   );

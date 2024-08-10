@@ -44,7 +44,6 @@ export default function MobileFooter({ hideContent }) {
     const buttonClik = () => {
       setIsActive(isActive ? false : true);
       hideContent();
-      
     };
 
     const getCodeScan = (code) => {

@@ -5,7 +5,7 @@ const SelectForm = ({  blokNumber }) => {
       <select
         name="cars"
         id="cars"
-        className="border-2 p-2 rounded-md w-full uppercase"
+        className="border-b-2  p-2  w-full uppercase"
         defaultValue={blokNumber}
       >
         {numberBlokList.map((blok) => (

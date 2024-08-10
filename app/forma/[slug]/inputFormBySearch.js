@@ -1,5 +1,5 @@
 "use client";
-import testClient from "@/app/actions/sheet/test";
+import testClient from "@/actions/sheet/test";
 import { useState } from "react";
 
 function InputFormBySearch({ data, label, blokNumber, qrCode }) {
@@ -13,18 +13,14 @@ function InputFormBySearch({ data, label, blokNumber, qrCode }) {
 
   const handleClick = (dt) => {
     setSearch(dt.Nama);
-    setPemilih({ ...dt, blokNumber,qrCode });
-    setIsDisable(true);
+    setPemilih({ ...dt, blokNumber, qrCode });
+    setIsDisable(!isDisable);
   };
 
-  const HandleClickSubmit = async () => {
-    // Fungsi untuk melakukan POST request
-    const response = await fetch("/googlesheet", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(pemilih),
-    });
-    console.log(await response.json());
+  const handleDelete = () => {
+    setPemilih("");
+     setSearch("");
+    setIsDisable(!isDisable);
   };
 
   return (
@@ -36,8 +32,15 @@ function InputFormBySearch({ data, label, blokNumber, qrCode }) {
           onChange={(e) => setSearch(e.target.value)}
           value={search}
           disabled={isDisable}
-          className={`border-b-2 p-2 rounded-md w-full capitalize `}
+          className={`border-b-2 p-2  w-full capitalize focus:outline-none focus:border-green-600  `}
         />
+        {pemilih && (
+          <div className=" text-end">
+            <p onClick={handleDelete} className="p-1 text-sm cursor-pointer uppercase">
+              clear
+            </p>
+          </div>
+        )}
         <div className="absolute top-[70px] w-full right-0">
           {search &&
             !isDisable &&
@@ -57,13 +60,7 @@ function InputFormBySearch({ data, label, blokNumber, qrCode }) {
       <div className="flex-col justify-center mt-8 mb-10">
         {pemilih && (
           <form action={testClient}>
-            <input
-              value={qrCode}
-              name="qrcode"
-              hidden
-              type="text"
-              readOnly
-            />
+            <input value={qrCode} name="qrcode" hidden type="text" readOnly />
             <input
               value={pemilih?.No}
               name="no_pemilih"

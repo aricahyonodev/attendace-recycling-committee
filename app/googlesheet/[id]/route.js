@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { googleSheet } from "../../helpers/googleSheet";
+import { googleSheet } from "../../../helpers/googleSheet";
 
 export async function GET(request, context ) {
   const id = context.params.id 

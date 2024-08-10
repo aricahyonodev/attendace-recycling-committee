@@ -1,6 +1,6 @@
 "use server";
 
-import { googleSheet } from "@/app/helpers/googleSheet";
+import { googleSheet } from "@/helpers/googleSheet";
 import { redirect } from "next/navigation";
 
 export default async function testClient(formData) {
