@@ -6,7 +6,7 @@ import { promises as fs } from "fs";
   
     try {
       // 1. Membaca file JSON
-      const filePath = process.cwd() + "/app/data.json";
+      const filePath = process.cwd() + "./../app/data.json";
       const file = await fs.readFile(filePath, "utf8");
       const data = JSON.parse(file); // Mengurai JSON
 
