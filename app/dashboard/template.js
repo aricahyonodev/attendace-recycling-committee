@@ -1,7 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation";
-import MobileFooter from "../scan/mobileFooter";
-import NavbarTop from "../scan/navbarTop";
+import MobileFooter from "../scan-computer/mobileFooter";
+import NavbarTop from "../scan-computer/navbarTop";
 import { useState } from "react";
 export default function DashboardTemplate({ children }) {
  

@@ -5,8 +5,8 @@ import { useEffect, useState } from "react";
 import { MdQrCode2 } from "react-icons/md";
 import useSWR from "swr";
 import { useRouter } from "next/navigation";
-import MobileFooter from "../scan/mobileFooter";
-import NavbarTop from "../scan/navbarTop";
+import MobileFooter from "../scan-computer/mobileFooter";
+import NavbarTop from "../scan-computer/navbarTop";
 import Avatar from "boring-avatars";
 
 const members = [

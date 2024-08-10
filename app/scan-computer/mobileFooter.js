@@ -11,7 +11,7 @@ import { FaRegBookmark } from "react-icons/fa";
 import { MdOutlineDoorBack } from "react-icons/md";
 import { TbDoorExit } from "react-icons/tb";
 import { VscNotebook } from "react-icons/vsc";
-import QRCodeScanner from "../scan-computer/page";
+import QRCodeScanner from "./page";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 // FaBookmark;

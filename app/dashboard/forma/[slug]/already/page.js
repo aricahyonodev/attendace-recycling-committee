@@ -1,4 +1,4 @@
-import MobileFooter from "@/app/scan/mobileFooter";
+import MobileFooter from "@/app/scan-computer/mobileFooter";
 import Link from "next/link";
 import { CiWarning } from "react-icons/ci";
 
