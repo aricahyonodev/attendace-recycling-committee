@@ -38,5 +38,6 @@ export default async function testClient(formData) {
 
   rows[rowId].set("Token", qrCode);
   await rows[rowId].save();
-  redirect("/home");
+  redirect(`/forma/${nameToUrl(name)}/success`);
+
 }

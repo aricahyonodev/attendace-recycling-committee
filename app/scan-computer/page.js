@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import Webcam from "react-webcam";
 import jsQR from "jsqr";
 import { useMediaQuery } from "react-responsive";
+import { PiCameraRotateLight } from "react-icons/pi";
 
 const QRCodeScanner = ({ getCodeScan }) => {
   const [isScanning, setIsScanning] = useState(true);
@@ -89,18 +90,25 @@ const QRCodeScanner = ({ getCodeScan }) => {
   return (
     <div>
       <div className="flex flex-col justify-center items-center relative">
-        <button
-          className="absolute z-10 top-0 mt-1 rounded-md px-4 py-2 bg-green-500 text-white font-medium lg:hidden"
-          onClick={() => setChangeCamera(!changeCamera)}
-        >
-          {changeCamera ? "Kamera Belakang" : "Kamera Depan"}
-        </button>
+        {isTabletOrMobile && (
+          <button
+            className="absolute z-10 top-0 mt-1 rounded-md px-4 py-2 bg-green-500 text-white font-medium lg:hidden"
+            onClick={() => setChangeCamera(!changeCamera)}
+          >
+            <PiCameraRotateLight className="inline-block mr-1" size={"2em"} />
+            <p>{changeCamera ? "Kamera Depan" : "Kamera Belakang"}</p>
+          </button>
+        )}
+
         <div style={{ height: "100vh", width: "100%" }}>
           <Webcam
             audio={false}
             ref={webcamRef}
             videoConstraints={{
-              facingMode: isTabletOrMobile && changeCamera ? { exact: "environment" } : "user",
+              facingMode:
+                isTabletOrMobile && changeCamera
+                  ? { exact: "environment" }
+                  : "user",
             }}
             screenshotFormat="image/jpeg"
             style={{ width: "100%", height: "100%", objectFit: "cover" }}

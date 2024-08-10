@@ -81,7 +81,7 @@ function InputFormBySearch({ data, label, blokNumber, qrCode }) {
             <button
               type="submit"
               // onClick={HandleClickSubmit}
-              className="bg-green-500 font-medium p-2 w-full rounded-md"
+              className="bg-green-500 font-medium p-2 w-full cursor-pointer uppercase text-white rounded-md"
             >
               Submit
             </button>
