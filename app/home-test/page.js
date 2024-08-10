@@ -24,12 +24,17 @@ export default function Home() {
 
   return (
     <div className="flex justify-center text-center items-center">
-      <div className="sm:w-screen sm:h-screen h-screen w-screen">
+      <div className="lg:w-1/2 ">
         {!code && (
-          <button onClick={buttonClik} className="p-6 bg-red-300 text-center">
-            {!isActive && <MdQrCode2 size={"6em"} className="inline-block" />}
-            <p> {isActive ? "Matikan Camera" : "Scan Barcode"}</p>
-          </button>
+          <div className="absolute top-1 left-0 right-0 z-10">
+            <button
+              onClick={buttonClik}
+              className=" hidden lg:inline-block  p-6 bg-green-300 text-center"
+            >
+              {!isActive && <MdQrCode2 size={"6em"} className="inline-block" />}
+              <p> {isActive ? "Matikan Camera" : "Scan Barcode"}</p>
+            </button>
+          </div>
         )}
         {isActive && <QRCodeScanner getCodeScan={getCodeScan} />}
       </div>
