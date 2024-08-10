@@ -51,3 +51,22 @@ export default async function testClient(formData) {
     `/dashboard/forma/${nameToUrl(name)}/success`
   );
 }
+
+export const first = async() => {
+  try {
+  // 1. Membaca file JSON
+  const filePath = process.cwd() + "/app/data.json";
+  const file = await fs.readFile(filePath, "utf8");
+  const data = JSON.parse(file); // Mengurai JSON
+
+  // 2. Mengubah nilai googleSheetId
+  data.googleSheetId = formdata.get(google_sheet_id);
+
+  // 3. Mengubah data menjadi string JSON dan menulis ke file
+  const jsonString = JSON.stringify(data, null, 2); // Format JSON dengan indentasi
+  await fs.writeFile(filePath, jsonString, "utf8"); // Menulis ke file
+  console.log("File has been updated successfully");
+} catch (error) {
+  console.error("Failed to update file:", error);
+}
+}

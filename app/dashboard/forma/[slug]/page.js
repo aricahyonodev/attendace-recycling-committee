@@ -31,7 +31,7 @@ export default async function FormA({ params }) {
 
   try {
     const revalidatedData = await fetch(
-      `https://attendace-recycling-committee.vercel.app/googlesheet/${blokNumber}`,
+      `http://localhost:3000/googlesheet/${blokNumber}`,
       { cache: "no-store" }
     );
     data = await revalidatedData.json();

@@ -64,13 +64,13 @@ export default function Home() {
 
   const getCodeScan = (code) => {
     setCode(code);
-    router.push(`/forma/${code}`);
+    router.push(`/dashboard/forma/${code}`);
   };
 
   return (
       <div className="px-4">
         {!isActive && (
-          <div>
+          <div className="lg:hidden">
             <div className="mt-24 bg-white rounded-md text-center pt-4 pb-6 shadow-sm text-sm">
               <div>
                 <p className="text-4xl">40</p>

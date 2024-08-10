@@ -14,6 +14,7 @@ import { VscNotebook } from "react-icons/vsc";
 import QRCodeScanner from "./page";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
+import Link from "next/link";
 // FaBookmark;
 export function QrCode({ buttonScan }) {
   return (
@@ -67,10 +68,20 @@ export default function MobileFooter({ hideContent }) {
         <QrCode buttonScan={buttonClik} />
         <div className="flex ">
           <div className="flex-1 flex justify-between space-x-6 text-sm">
-            <div className="flex-row text-center text-[#118911]">
-              <GoHomeFill size={"1.6em"} className="inline-block" />
-              <p>Home</p>
-            </div>
+            <Link
+              className={`${
+                pathname.includes("/dashboard") &&
+                pathname !== "/dashboard/setting-google-id"
+                  ? "text-[#118911]"
+                  : "text-[#939185]"
+              }`}
+              href={"/dashboard"}
+            >
+              <div className="flex-row text-center ">
+                <GoHomeFill size={"1.6em"} className="inline-block" />
+                <p>Home</p>
+              </div>
+            </Link>
             <div className="flex-row text-center text-[#939185]">
               <RiFileList3Line size={"1.6em"} className="inline-block" />
               <p>Record</p>
@@ -79,10 +90,19 @@ export default function MobileFooter({ hideContent }) {
             {/* <IoIosListBox size={"2em"} className="text-white" /> */}
             {/* <FaRegRectangleList size={"2em"} className="text-white" /> */}
             {/* <RiFileList3Line size={"2em"} className="text-white" /> */}
-            <div className="flex-row text-center text-[#939185]">
-              <VscNotebook size={"1.6em"} className="inline-block" />
-              <p>Note</p>
-            </div>
+            <Link
+              className={`${
+                pathname === "/dashboard/setting-google-id"
+                  ? "text-[#118911]"
+                  : "text-[#939185]"
+              }`}
+              href={"/dashboard/setting-google-id"}
+            >
+              <div className="flex-row text-center ">
+                <VscNotebook size={"1.6em"} className="inline-block" />
+                <p>Note</p>
+              </div>
+            </Link>
             <div className="flex-row text-center text-[#939185]">
               <TbDoorExit size={"1.6em"} className="inline-block" />
               <p>Exit</p>

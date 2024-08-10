@@ -1,5 +1,6 @@
 import { GoogleSpreadsheet } from "google-spreadsheet";
 import { JWT } from "google-auth-library";
+import { promises as fs } from "fs";
 
 async function googleSheet(params) {
   const SCOPES = [
@@ -12,10 +13,14 @@ async function googleSheet(params) {
     key: process.env.GOOGLE_KEY.replace(/\\n/g, "\n"),
     scopes: SCOPES,
   });
-  const doc = new GoogleSpreadsheet(process.env.GOOGLE_SHEET_ID, jwt);
-
+  const file = await fs.readFile(process.cwd() + "/app/data.json", "utf8");
+  const data = JSON.parse(file);
+  const doc = new GoogleSpreadsheet(data.googleSheetId, jwt);
+  
   await doc.loadInfo();
   return doc
 }
 
 export { googleSheet };
+
+

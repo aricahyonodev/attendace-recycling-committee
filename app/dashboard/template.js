@@ -25,7 +25,7 @@ export default function DashboardTemplate({ children }) {
     <section>
       {/* Include shared UI here e.g. a header or sidebar */}
       {!contentHide && <NavbarTop />}
-      {!contentHide && children}
+      {!contentHide && <div className="">{children}</div>}
       <MobileFooter hideContent={() => setContentHide(!contentHide)} />
     </section>
   );
